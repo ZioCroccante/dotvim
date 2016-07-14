@@ -62,7 +62,7 @@ let mapleader = "," "Leader is comma
 inoremap jk <esc>
 vnoremap jk <esc>
 inoremap <esc> <nop>
-" edit vimrc/zshrc and load vimrc bindings
+""" edit vimrc/zshrc and load vimrc bindings
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 " wrap word 
@@ -83,7 +83,6 @@ vnoremap <leader>> <esc>`<i<<esc>`>la><esc>
 " Delete line 
 inoremap <c-d> <esc> ddi
 noremap <leader>d dd
-noremap dL d$
 " Swap line down
 nnoremap - ddp
 " Swap line up
