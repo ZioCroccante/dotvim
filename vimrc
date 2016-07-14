@@ -4,8 +4,9 @@ set background=dark
 color kolor
 " }}}
 " Misc {{{
+execute pathogen#infect()
+syntax on
 filetype plugin on
-syntax enable
 " }}}
 " Spaces & Tabs {{{
 set tabstop=4
@@ -102,6 +103,8 @@ nnoremap <leader>W :match none<CR>
 nnoremap / /\v
 " toggle number
 nnoremap <leader>N :setlocal number!<CR>
+" toggle gundo
+nnoremap <F5> :GundoToggle<CR>
 "" grep command
 "nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen 5 <cr>
 " }}}
