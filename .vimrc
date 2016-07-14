@@ -49,7 +49,7 @@ vnoremap L $
 nnoremap $ <nop>
 nnoremap ^ <nop>
 " highlight last inserted text
-nnoremap gV `[v`] 
+nnoremap gV `[v`]
 " movement in split mode
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
@@ -58,14 +58,14 @@ nnoremap <c-l> <c-w>l
 " }}}
 " Personal Shortcut {{{
 let mapleader = "," "Leader is comma
-" jk is escape 
+set pastetoggle=<leader>p
+"" jk is escape
 inoremap jk <esc>
-vnoremap jk <esc>
 inoremap <esc> <nop>
-""" edit vimrc/zshrc and load vimrc bindings
+" edit vimrc and load vimrc bindings
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
-" wrap word 
+" wrap word
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 vnoremap <leader>' <esc>`<i'<esc>`>la'<esc>
 "
@@ -80,7 +80,7 @@ vnoremap <leader>} <esc>`<i{<esc>`>la}<esc>
 "
 nnoremap <leader>> viw<esc>a><esc>hbi<<esc>lel
 vnoremap <leader>> <esc>`<i<<esc>`>la><esc>
-" Delete line 
+" Delete line
 inoremap <c-d> <esc> ddi
 noremap <leader>d dd
 " Swap line down
@@ -94,10 +94,16 @@ inoremap <c-u> <esc>hviwUA
 noremap <c-\> :bnext<cr>
 " off highlighted search
 nnoremap <leader><space> :nohlsearch<CR>
+" match trailing spaces and tabs
+nnoremap <leader>w :match Cursor /\v[ \t]+$/<CR>
 " clear match
 nnoremap <leader>W :match none<CR>
 " add magic \v when search
 nnoremap / /\v
+" toggle number
+nnoremap <leader>N :setlocal number!<CR>
+"" grep command
+"nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen 5 <cr>
 " }}}
 " AutoGroups {{{
 augroup filetype_vim
@@ -111,4 +117,33 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
+" }}}
+" Functions {{{
+"  toggle foldcolumn
+nnoremap <leader>f :call <SID>FoldColumnToggle()<cr>
+
+function! s:FoldColumnToggle()
+    if &foldcolumn
+        setlocal foldcolumn=0
+    else
+        setlocal foldcolumn=4
+    endif
+endfunction
+"
+" toggle quickfix window
+nnoremap <leader>q :call <SID>QuickFixToggle()<cr>
+
+let g:quickfix_is_open = 0
+
+function! s:QuickFixToggle()
+    if g:quickfix_is_open
+        cclose
+        execute g:quickfix_return_to_window . "wincmd w"
+        let g:quickfix_is_open = 0
+    else
+        let g:quickfix_return_to_window = winnr()
+        copen
+        let g:quickfix_is_open = 1
+    endif
+endfunction
 " }}}
