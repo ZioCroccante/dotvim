@@ -105,6 +105,8 @@ nnoremap / /\v
 nnoremap <leader>N :setlocal number!<CR>
 " toggle gundo
 nnoremap <F5> :GundoToggle<CR>
+" open NERDTree
+nnoremap \nt :NERDTree<CR>
 "" grep command
 "nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen 5 <cr>
 " }}}
